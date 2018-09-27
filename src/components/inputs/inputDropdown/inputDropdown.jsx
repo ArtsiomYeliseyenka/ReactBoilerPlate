@@ -13,6 +13,8 @@ export class InputDropdown extends Component {
     multiple: PropTypes.bool,
     selectAll: PropTypes.bool,
     disabled: PropTypes.bool,
+    error: PropTypes.bool,
+    touched: PropTypes.bool,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -24,6 +26,8 @@ export class InputDropdown extends Component {
     multiple: false,
     selectAll: false,
     disabled: false,
+    error: false,
+    touched: false,
     onChange: () => {},
     onFocus: () => {},
     onBlur: () => {},
@@ -51,7 +55,7 @@ export class InputDropdown extends Component {
   };
 
   handleClickOutside = (e) => {
-    if (!this.node.contains(e.target)) {
+    if (!this.node.contains(e.target) && this.state.opened) {
       this.setState({ opened: false });
       this.props.onBlur();
     }
@@ -148,18 +152,22 @@ export class InputDropdown extends Component {
   }
 
   render() {
+    const { error, touched, multiple, selectAll } = this.props;
     return (
       <div ref={this.setRef} className={cx('dropdown', { opened: this.state.opened })}>
         <div
-          className={cx('select-block', { disabled: this.props.disabled })}
+          className={cx('select-block', {
+            disabled: this.props.disabled,
+            error: error && touched,
+          })}
           onClick={this.onClickSelectBlock}
         >
           <span className={cx('value')}>{this.displayedValue()}</span>
           <span className={cx('arrow')} />
         </div>
         <div className={cx('select-list')}>
-          {this.props.multiple &&
-            this.props.selectAll && (
+          {multiple &&
+            selectAll && (
               <div className={cx('select-all-block')} onClick={this.handleAllClick}>
                 <span className={cx('select-all')}>All</span>
               </div>

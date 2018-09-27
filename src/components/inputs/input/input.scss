@@ -6,7 +6,7 @@
   padding: 6px 10px;
   margin: 0;
   box-sizing: border-box;
-  border: 1px solid $COLOR--gray-80;
+  border: 1px solid $COLOR--white;
   outline: none;
   background-color: $COLOR--white-two;
   font-family: $FONT-REGULAR;
@@ -31,8 +31,8 @@
     box-shadow: 0 0 2px 0 rgba($COLOR--orange-red, 0.7);
   }
   &.disabled {
-    background-color: $COLOR--gray-91;
-    border-color: $COLOR--gray-80;
+    background-color: $COLOR--pale-grey-four;
+    border-color: $COLOR--pale-grey-four;
   }
 
   &:-webkit-autofill {

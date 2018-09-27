@@ -25,7 +25,9 @@ export class ScreenLock extends Component {
           ReactDOM.createPortal(
             <div className={cx('screen-lock')}>
               <div className={cx('backdrop')} />
-              <SpinningPreloader />
+              <div className={cx('preloader-wrapper')}>
+                <SpinningPreloader />
+              </div>
             </div>,
             ScreenLockRoot,
           )}

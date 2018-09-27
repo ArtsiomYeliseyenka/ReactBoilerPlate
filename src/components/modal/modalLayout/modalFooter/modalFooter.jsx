@@ -86,7 +86,7 @@ export class ModalFooter extends Component {
         <div className={cx('buttons-block')}>
           {cancelButton && (
             <div className={cx('button-container')}>
-              <BigButton color={'gray-60'} onClick={onClickCancel}>
+              <BigButton color={'skipped'} onClick={onClickCancel}>
                 {cancelButton.text}
               </BigButton>
             </div>
@@ -94,7 +94,7 @@ export class ModalFooter extends Component {
           {okButton && (
             <div className={cx('button-container')}>
               <BigButton
-                color={okButton.danger ? 'tomato' : 'booger'}
+                color={okButton.danger ? 'tomato' : 'tealish'}
                 onClick={onClickOk}
                 disabled={okButton.disabled}
               >

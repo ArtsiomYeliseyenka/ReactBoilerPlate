@@ -5,8 +5,18 @@ import styles from './ghostButton.scss';
 
 const cx = classNames.bind(styles);
 
-export const GhostButton = ({ type, children, disabled, color, icon, onClick, tiny }) => {
-  const classes = cx({
+export const GhostButton = ({
+  type,
+  children,
+  disabled,
+  color,
+  icon,
+  onClick,
+  tiny,
+  minWidth,
+  className,
+}) => {
+  const classes = cx(className, {
     'ghost-button': true,
     disabled,
     tiny,
@@ -15,7 +25,13 @@ export const GhostButton = ({ type, children, disabled, color, icon, onClick, ti
     'mobile-minified': icon && children,
   });
   return (
-    <button type={type} disabled={disabled} className={classes} onClick={onClick}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={classes}
+      onClick={onClick}
+      style={minWidth && { minWidth }}
+    >
       {icon && <i className={cx({ icon: true, 'only-icon': !children })}>{Parser(icon)}</i>}
       {children && <span className={cx('text')}>{children}</span>}
     </button>
@@ -29,6 +45,8 @@ GhostButton.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   type: PropTypes.string,
+  className: PropTypes.string,
+  minWidth: PropTypes.number,
   onClick: PropTypes.func,
 };
 
@@ -36,8 +54,10 @@ GhostButton.defaultProps = {
   children: null,
   disabled: false,
   tiny: false,
-  color: 'topaz',
+  minWidth: null,
+  color: 'tealish',
   icon: '',
+  className: '',
   type: 'button',
   onClick: () => {},
 };

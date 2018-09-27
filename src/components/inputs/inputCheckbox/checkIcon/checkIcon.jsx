@@ -14,7 +14,7 @@ export const CheckIcon = ({ disabled, centered, checked }) => (
       viewBox="0 0 8 7"
     >
       <polygon
-        fill={disabled ? '#999' : '#fff'}
+        fill={disabled ? '#999' : '#39c2d7'}
         fillRule="evenodd"
         points="0 3.111 3 6.222 8 1.037 7 0 3 4.148 1 2.074"
       />

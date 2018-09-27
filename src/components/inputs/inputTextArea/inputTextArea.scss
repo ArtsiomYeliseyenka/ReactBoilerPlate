@@ -2,11 +2,12 @@
   position: relative;
   display: inline-block;
   height: 60px;
+  min-height: 32px;
   width: 100%;
   padding: 6px 10px;
   margin: 0;
   box-sizing: border-box;
-  border: 1px solid $COLOR--gray-80;
+  border: 1px solid $COLOR--white;
   outline: none;
   background-color: $COLOR--white-two;
   font-family: $FONT-REGULAR;

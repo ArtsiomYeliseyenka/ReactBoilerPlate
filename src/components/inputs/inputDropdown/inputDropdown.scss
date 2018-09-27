@@ -23,7 +23,7 @@
   height: 100%;
   box-sizing: border-box;
   padding: 0 25px 0 10px;
-  border: 1px solid $COLOR--gray-80;
+  border: 1px solid $COLOR--white;
   background-color: $COLOR--white-two;
   cursor: pointer;
 
@@ -34,6 +34,10 @@
   &.disabled {
     background-color: $COLOR--gray-91;
     cursor: default;
+  }
+  &.error {
+    border-color: $COLOR--orange-red;
+    box-shadow: 0 0 2px 0 rgba($COLOR--orange-red, 0.7);
   }
 }
 .value {

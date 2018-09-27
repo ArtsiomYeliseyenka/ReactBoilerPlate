@@ -3,12 +3,10 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { hideModalAction } from 'controllers/modal';
-import Parser from 'html-react-parser';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { ModalContent, ModalFooter } from '../';
+import { ModalContent, ModalFooter, ModalHeader } from '../';
 import styles from './modalLayout.scss';
-import CloseIcon from './img/icon-close-inline.svg';
 
 const cx = classNames.bind(styles);
 
@@ -22,7 +20,8 @@ export class ModalLayout extends Component {
   static propTypes = {
     className: PropTypes.string,
     fullWidthContent: PropTypes.bool,
-    hideModalAction: PropTypes.func.isRequired, // this props
+    hideModalAction: PropTypes.func.isRequired,
+    smallTopOffset: PropTypes.bool, // this props
     title: PropTypes.string, // header props
 
     children: PropTypes.node, // content props
@@ -45,6 +44,7 @@ export class ModalLayout extends Component {
     className: '',
     fullWidthContent: false,
     title: '',
+    smallTopOffset: false,
 
     children: null,
 
@@ -129,6 +129,7 @@ export class ModalLayout extends Component {
       children,
       confirmationMessage,
       confirmationWarning,
+      smallTopOffset,
     } = this.props;
     const footerProps = {
       warningMessage,
@@ -143,8 +144,11 @@ export class ModalLayout extends Component {
     };
 
     return (
-      <div className={cx('modal-layout')}>
-        <div className={cx('scrolling-content')} onClick={this.onClickModal}>
+      <div className={cx('modal-layout', { 'small-top-offset': smallTopOffset })}>
+        <div
+          className={cx('scrolling-content')}
+          // onClick={this.onClickModal} // Uncomment to enable backdrop modal close.
+        >
           <Scrollbars>
             <CSSTransition
               timeout={300}
@@ -159,13 +163,7 @@ export class ModalLayout extends Component {
                   }}
                   className={cx('modal-window', this.props.className)}
                 >
-                  <div className={cx('modal-header')}>
-                    <span className={cx('modal-title')}>{title}</span>
-                    <div className={cx('close-modal-icon')} onClick={this.closeModal}>
-                      {Parser(CloseIcon)}
-                    </div>
-                    <div className={cx('separator')} />
-                  </div>
+                  <ModalHeader title={title} onClose={this.closeModal} />
 
                   <ModalContent fullWidthContent={this.props.fullWidthContent}>
                     {status !== 'exited' ? children : null}

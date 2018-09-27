@@ -21,7 +21,6 @@ export const InputSearch = ({
   active,
 }) => (
   <div className={cx('input-search', { error, active, disabled })}>
-    <div className={cx('icon')}>{Parser(SearchIcon)}</div>
     <input
       ref={refFunction}
       type={type}
@@ -35,6 +34,7 @@ export const InputSearch = ({
       onBlur={onBlur}
       onKeyUp={onKeyUp}
     />
+    <div className={cx('icon')}>{Parser(SearchIcon)}</div>
   </div>
 );
 

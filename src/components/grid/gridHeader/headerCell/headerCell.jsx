@@ -1,66 +1,59 @@
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
 import Parser from 'html-react-parser';
-import { columnPropTypes } from 'components/grid/propTypes';
-import { ALIGN_LEFT } from 'components/grid';
-import ArrowIcon from './img/arrow-down-inline.svg';
-import FilterIcon from './img/icon-filter-inline.svg';
+import classNames from 'classnames/bind';
+import ArrowIcon from 'common/img/icon-arrow-down-inline.svg';
 import styles from './headerCell.scss';
 
 const cx = classNames.bind(styles);
 
 export const HeaderCell = ({
+  data,
   title,
-  align,
-  sortable,
-  id,
-  sortingActive,
-  sortingDirection,
-  onChangeSorting,
-  withFilter,
-  onFilterClick,
+  headerComponent,
+  width,
+  withExpander,
+  hasExpandedRows,
+  actions,
+  onExpandAll,
+  selectable,
 }) => {
-  const computedClassName = {
-    [`align-${align}`]: align,
-    [`sorting-${sortingDirection.toLowerCase()}`]: sortingDirection,
-    sortable,
-    'sorting-active': sortingActive,
-    'with-filter': withFilter,
-  };
-  const filterClickHandler = (e) => {
-    e.stopPropagation();
-    onFilterClick(id);
-  };
+  const HeaderComponent = headerComponent;
   return (
-    <div className={cx('header-cell', computedClassName)} onClick={() => onChangeSorting(id)}>
-      <div className={cx('title-container')}>
-        <div className={cx('filter')} onClick={filterClickHandler}>
-          {Parser(FilterIcon)}
+    <div
+      className={cx('header-cell', { 'expand-cell': withExpander, selectable })}
+      style={{ width }}
+    >
+      {title && <span className={cx('title')}>{title}</span>}
+      {headerComponent && <HeaderComponent actions={actions} data={data} />}
+      {withExpander && (
+        <div className={cx('expand-icon', { expanded: hasExpandedRows })} onClick={onExpandAll}>
+          {Parser(ArrowIcon)}
         </div>
-        <span className={cx('title-full')}>{title.full}</span>
-        <span className={cx('title-short')}>{title.short || title.full}</span>
-        <div className={cx('arrow')}>{Parser(ArrowIcon)}</div>
-      </div>
+      )}
     </div>
   );
 };
 HeaderCell.propTypes = {
-  ...columnPropTypes,
-  sortingDirection: PropTypes.string,
-  sortingActive: PropTypes.bool,
-  onChangeSorting: PropTypes.func,
-  onFilterClick: PropTypes.func,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  headerComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  width: PropTypes.string,
+  data: PropTypes.object,
+  withExpander: PropTypes.bool,
+  selectable: PropTypes.bool,
+  actions: PropTypes.object,
+  hasExpandedRows: PropTypes.bool,
+  onExpandAll: PropTypes.func,
 };
 HeaderCell.defaultProps = {
-  title: {
-    full: '',
-  },
-  align: ALIGN_LEFT,
-  sortable: false,
   id: '',
-  withFilter: false,
-  sortingDirection: 'DESC',
-  sortingActive: false,
-  onChangeSorting: () => {},
-  onFilterClick: () => {},
+  title: '',
+  headerComponent: null,
+  width: '',
+  data: {},
+  withExpander: false,
+  selectable: false,
+  actions: {},
+  hasExpandedRows: false,
+  onExpandAll: () => {},
 };

@@ -9,6 +9,7 @@ const cx = classNames.bind(styles);
 export class ScrollWrapper extends Component {
   static propTypes = {
     children: PropTypes.node,
+    disabled: PropTypes.bool,
     autoHide: PropTypes.bool,
     autoHeight: PropTypes.bool,
     autoHeightMin: PropTypes.number,
@@ -24,6 +25,7 @@ export class ScrollWrapper extends Component {
   };
   static defaultProps = {
     children: {},
+    disabled: false,
     autoHide: false,
     autoHeight: false,
     autoHeightMin: 0,
@@ -52,8 +54,9 @@ export class ScrollWrapper extends Component {
   };
 
   render() {
-    return (
-      // base props are defined. For more info see https://github.com/malte-wessel/react-custom-scrollbars/blob/master/docs/API.md
+    return this.props.disabled ? (
+      this.props.children // base props are defined. For more info see https://github.com/malte-wessel/react-custom-scrollbars/blob/master/docs/API.md
+    ) : (
       <Scrollbars
         ref={(scrollbars) => {
           this.scrollbars = scrollbars;

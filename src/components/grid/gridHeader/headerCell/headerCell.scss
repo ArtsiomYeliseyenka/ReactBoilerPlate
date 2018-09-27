@@ -1,108 +1,53 @@
 .header-cell {
   position: relative;
-  display: table-cell;
-  color: $COLOR--gray-47;
-  font-family: $FONT-SEMIBOLD;
-  font-size: 12px;
-  height: 50px;
-  padding-right: 10px;
-  padding-left: 10px;
-  text-transform: uppercase;
-  vertical-align: middle;
+  display: inline-flex;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 15px;
+  border-right: 1px solid $COLOR--white-two;
+  background-color: $COLOR--silver-two;
+  vertical-align: top;
 
-  &:first-child {
-    padding-left: 15px;
+  &.expand-cell {
+    padding: 0;
   }
 
   &:last-child {
-    padding-right: 15px;
-  }
+    border-right: none;
 
-  &.align-left {
-    text-align: left;
-  }
-  &.align-center {
-    text-align: center;
-  }
-  &.align-right {
-    text-align: right;
-  }
-
-  .title-short {
-    display: none;
-  }
-
-  @media (max-width: $SCREEN_XL_MAX) {
-    .title-full {
-      display: none;
-    }
-    .title-short {
-      display: inline;
+    &.selectable {
+      border-right: 10px solid $COLOR--white-two;
     }
   }
+}
+.title {
+  width: 100%;
+  overflow: hidden;
+  margin: auto 0;
+  font-family: $FONT-SEMIBOLD;
+  font-size: 13px;
+  color: $COLOR--gunmetal;
+  text-overflow: ellipsis;
+}
 
-  .title-container {
-    position: relative;
-    display: inline-block;
+.expand-icon {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  margin: auto;
+  cursor: pointer;
+  transform: rotate(-90deg);
+  transition: transform 200ms linear;
+
+  polygon {
+    fill: $COLOR--tealish;
   }
 
-  .arrow {
-    display: none;
-    position: absolute;
-    width: 7px;
-    top: -2px;
+  &.expanded {
+    transform: rotate(0deg);
 
-    svg {
-      fill: $COLOR--gray-47;
-      transform: translateX(3px);
-    }
-  }
-
-  &.sortable {
-    &.sorting-asc {
-      .arrow {
-        svg {
-          transform: translateX(3px) rotate(180deg);
-        }
-      }
-    }
-
-    &:hover {
-      cursor: pointer;
-
-      .arrow {
-        display: inline-block;
-      }
-    }
-  }
-
-  &.sorting-active {
-    .arrow {
-      display: inline-block;
-    }
-  }
-
-  .filter {
-    position: absolute;
-    display: none;
-    width: 12px;
-    height: 12px;
-    left: -18px;
-
-    svg {
-      fill: rgba($COLOR--gray-47, 0.5);
-    }
-
-    &:hover {
-      svg {
-        fill: $COLOR--topaz;
-      }
-    }
-  }
-
-  &.with-filter:hover {
-    .filter {
-      display: block;
+    polygon {
+      fill: $COLOR--topaz;
     }
   }
 }

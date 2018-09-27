@@ -8,58 +8,62 @@ const cx = classNames.bind(styles);
 
 const messages = defineMessages({
   loginHint: {
-    id: 'RegistrationForm.loginHint',
+    id: 'Validation.loginHint',
     defaultMessage:
-      "Login should have size from '1' to '128' symbols, latin, numeric characters, hyphen, underscore, dot.",
+      'Login should have size from 1 to 128 symbols, latin, numeric characters, hyphen, underscore, dot.',
   },
   nameHint: {
-    id: 'RegistrationForm.nameHint',
+    id: 'Validation.nameHint',
     defaultMessage:
-      "Full name should have size from '3' to '256' symbols, latin, cyrillic, numeric characters, hyphen, underscore, dot, space.",
+      'Full name should have size from 3 to 256 symbols, latin, cyrillic, numeric characters, hyphen, underscore, dot, space.',
   },
   passwordHint: {
-    id: 'RegistrationForm.passwordHint',
-    defaultMessage: "Password should have size from '4' to '25' symbols.",
+    id: 'Validation.passwordHint',
+    defaultMessage: 'Password should have size from 4 to 64 symbols.',
   },
   emailHint: {
-    id: 'Common.validation.email',
+    id: 'Validation.validation.email',
     defaultMessage: 'Email is incorrect. Please enter correct email.',
   },
   confirmPasswordHint: {
-    id: 'RegistrationForm.confirmPasswordHint',
+    id: 'Validation.confirmPasswordHint',
     defaultMessage: 'Passwords do not match.',
   },
-  filterNameError: {
-    id: 'FiltersPage.filterNameLength',
-    defaultMessage: 'Filter name length should have size from 3 to 128 characters.',
+  searchHint: {
+    id: 'Validation.searchHint',
+    defaultMessage: 'Query string should have size from 3 to 128 symbols.',
   },
-  launchNameHint: {
-    id: '  LaunchMergeModal.launchNameHint',
-    defaultMessage: 'Launch name should have size from 3 to 256.',
+  pipelineNameRequiredHint: {
+    id: 'Validation.pipelineNameRequiredHint',
+    defaultMessage: 'Pipeline name is required.',
   },
-  launchDescriptionHint: {
-    id: '  LaunchMergeModal.launchDescriptionHint',
-    defaultMessage: 'Description should have size not more than 1024 symbols.',
+  pipelineNameLengthHint: {
+    id: 'Validation.pipelineNameLengthHint',
+    defaultMessage: 'Pipeline name should have size from 3 to 128 symbols.',
   },
-  dashboardNameHint: {
-    id: 'AddEditDashboard.dashboardNameHint',
-    defaultMessage: 'Dashboard name should have size  from 3 to 128.',
+  pipelineNameAsyncHint: {
+    id: 'Validation.pipelineNameAsyncHint',
+    defaultMessage: 'Pipeline current name already exists.',
   },
-  dashboardNameSearchHint: {
-    id: 'SearchDashboardForm.dashboardNameSearchHint',
-    defaultMessage: 'Dashboard name should have size from 3 to 128',
+  sourceDataNameHint: {
+    id: 'Validation.sourceDataNameHint',
+    defaultMessage: 'Source data name should have size from 3 to 128 symbols.',
   },
-  itemNameEntityHint: {
-    id: 'LaunchLevelEntities.itemNameEntityHint',
-    defaultMessage: 'At least 3 symbols required',
+  targetNameHint: {
+    id: 'Validation.targetNameHint',
+    defaultMessage: 'Target name should have size from 3 to 128 symbols.',
   },
-  launchNumericEntityHint: {
-    id: 'LaunchLevelEntities.launchNumberEntityHint',
-    defaultMessage: 'This filter accepts only digits',
+  descriptionHint: {
+    id: 'Validation.descriptionHint',
+    defaultMessage: 'Description max length is 1024 symbols.',
   },
-  launchDescriptionEntityHint: {
-    id: 'LaunchLevelEntities.launchDescriptionEntityHint',
-    defaultMessage: 'At least 3 symbols required',
+  connectionStringHint: {
+    id: 'Validation.connectionStringHint',
+    defaultMessage: 'Connection string should be a valid address.',
+  },
+  schemeNameHint: {
+    id: 'Validation.schemeNameHint',
+    defaultMessage: 'Scheme name should have size from 3 to 128 symbols.',
   },
 });
 

@@ -73,4 +73,30 @@
       border-color: darken($COLOR--tomato, 30%);
     }
   }
+  &.color-tealish {
+    background-color: $COLOR--tealish;
+    border-color: $COLOR--tealish;
+
+    &:hover:not(.disabled) {
+      background-color: darken($COLOR--tealish, 15%);
+      border-color: darken($COLOR--tealish, 15%);
+    }
+    &:active:not(.disabled) {
+      background-color: darken($COLOR--tealish, 30%);
+      border-color: darken($COLOR--tealish, 30%);
+    }
+  }
+  &.color-skipped {
+    background-color: $COLOR--skipped;
+    border-color: $COLOR--skipped;
+
+    &:hover:not(.disabled) {
+      background-color: darken($COLOR--skipped, 15%);
+      border-color: darken($COLOR--skipped, 15%);
+    }
+    &:active:not(.disabled) {
+      background-color: darken($COLOR--skipped, 30%);
+      border-color: darken($COLOR--skipped, 30%);
+    }
+  }
 }

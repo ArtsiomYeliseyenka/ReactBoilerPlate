@@ -3,7 +3,7 @@
   display: flex;
   height: 30px;
   width: 100%;
-  border-bottom: 1px solid $COLOR--gray-80;
+  border: 1px solid $COLOR--pale-grey-two;
   box-sizing: border-box;
   transition: border-color ease-in-out 0.15s;
 
@@ -12,10 +12,12 @@
   }
   &.active {
     background-color: inherit;
-    border-color: $COLOR--topaz;
+    border-color: $COLOR--tealish;
+    box-shadow: 0 0 2px 0 rgba($COLOR--tealish, 0.7);
   }
   &.error {
     border-color: $COLOR--orange-red;
+    box-shadow: 0 0 2px 0 rgba($COLOR--orange-red, 0.7);
   }
   &.disabled {
     border-color: $COLOR--gray-80;
@@ -31,10 +33,10 @@
   margin: auto;
   width: 16px;
   height: 16px;
-  margin-left: 2px;
+  margin-right: 5px;
 
   svg {
-    fill: $COLOR--gray-60;
+    fill: $COLOR--tealish;
   }
 }
 .input {
@@ -51,9 +53,10 @@
   color: $COLOR--charcoal-grey;
   box-shadow: none;
 
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #fdffeb inset;
+  &::placeholder {
+    color: $COLOR--silver;
   }
+
   &[type='number']::-webkit-inner-spin-button,
   &[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;

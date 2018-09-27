@@ -2,6 +2,8 @@
   position: relative;
   display: table;
   width: 100%;
+  box-sizing: border-box;
+  padding: 25px;
 }
 .warning-block-wrap {
   position: relative;
@@ -47,13 +49,14 @@
   display: inline-block;
   height: 30px;
   min-width: 70px;
-  margin-right: 10px;
+  margin-right: 15px;
 
   &:last-child {
     margin-right: 0;
   }
 
   button {
+    border-radius: 3px;
     font-size: 13px;
   }
 }

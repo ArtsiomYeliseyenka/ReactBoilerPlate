@@ -1,124 +1,88 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { columnPropTypes } from '../../propTypes';
 import { GridCell } from './gridCell';
-import { CheckboxCell } from './checkboxCell';
+import { ExpanderCell } from './expanderCell';
 import styles from './gridRow.scss';
 
 const cx = classNames.bind(styles);
 
 export class GridRow extends Component {
   static propTypes = {
-    columns: PropTypes.arrayOf(PropTypes.shape(columnPropTypes)),
-    value: PropTypes.object,
+    columns: PropTypes.array,
+    data: PropTypes.object,
+    meta: PropTypes.object,
+    actions: PropTypes.object,
+    withSubInfo: PropTypes.bool,
+    subInfoComponent: PropTypes.func,
+    expanded: PropTypes.bool,
+    onExpand: PropTypes.func,
     selectable: PropTypes.bool,
-    selectedItems: PropTypes.arrayOf(PropTypes.object),
-    onToggleSelection: PropTypes.func,
+    selected: PropTypes.bool,
+    onSelect: PropTypes.func,
   };
-
   static defaultProps = {
     columns: [],
-    value: {},
-    selectable: false,
-    selectedItems: [],
-    onToggleSelection: () => {},
-  };
-
-  state = {
-    withAccordion: false,
+    data: {},
+    meta: {},
+    actions: {},
+    withSubInfo: false,
+    subInfoComponent: null,
     expanded: false,
-  };
-  componentDidMount() {
-    this.handleAccordion();
-  }
-  componentDidUpdate() {
-    this.handleAccordion();
-  }
-  setupRef = (overflowCell) => {
-    this.overflowCell = overflowCell;
-  };
-  setupAccordion = () => {
-    this.setState({ withAccordion: true });
-    this.overflowCell.style.maxHeight = `${this.overflowCellMaxHeight}px`;
-  };
-  removeAccordion = () => {
-    this.setState({ withAccordion: false });
-    this.overflowCell.style.maxHeight = null;
-  };
-  handleAccordion = () => {
-    if (!this.overflowCell) {
-      return;
-    }
-    if (this.overflowCell.offsetHeight > this.overflowCellMaxHeight) {
-      !this.state.withAccordion && this.setupAccordion();
-    } else if (this.overflowCell.offsetHeight < this.overflowCellMaxHeight) {
-      this.state.withAccordion && this.removeAccordion();
-    }
+    onExpand: () => {},
+    selectable: false,
+    selected: false,
+    onSelect: () => {},
   };
 
-  toggleAccordion = () => {
-    this.setState({ expanded: !this.state.expanded });
-    this.overflowCell.style.maxHeight = this.state.expanded
-      ? `${this.overflowCellMaxHeight}px`
-      : null;
+  onSelect = () => {
+    this.props.selectable && this.props.onSelect(this.props.data.id);
   };
-
-  isItemSelected = () => this.props.selectedItems.some((item) => item.id === this.props.value.id);
+  onExpand = () => {
+    this.props.onExpand();
+  };
 
   render() {
-    const { columns, value, selectable } = this.props;
+    const {
+      columns,
+      data,
+      meta,
+      actions,
+      withSubInfo,
+      expanded,
+      selectable,
+      selected,
+      subInfoComponent,
+    } = this.props;
+    const SubInfoComponent = subInfoComponent;
     return (
-      <div className={cx('grid-row-wrapper', { selected: this.isItemSelected() })}>
-        {this.state.withAccordion && (
-          <div className={cx('accordion-wrapper-mobile')}>
-            <div
-              className={cx({ 'accordion-toggler-mobile': true, rotated: this.state.expanded })}
-              onClick={this.toggleAccordion}
-            />
-          </div>
-        )}
-        <div className={cx('grid-row')}>
-          {columns.map((column, i) => {
-            if (column.maxHeight) {
-              this.overflowCellMaxHeight = column.maxHeight;
-            }
-            return (
-              <GridCell
-                key={column.id || i}
-                refFunction={column.maxHeight ? this.setupRef : null}
-                mobileWidth={column.mobileWidth}
-                value={value}
-                align={column.align}
-                component={column.component}
-                formatter={column.formatter}
-                title={column.title}
-                customProps={column.customProps}
-              />
-            );
-          })}
-          {selectable && (
-            <GridCell
-              align={'right'}
-              component={CheckboxCell}
-              value={value}
-              customProps={{
-                selected: this.isItemSelected(),
-                onChange: this.props.onToggleSelection,
-              }}
-            />
+      <div
+        className={cx('grid-row', {
+          expanded,
+          selectable,
+          selected,
+        })}
+        onClick={this.onSelect}
+      >
+        <div className={cx('grid-row-main')}>
+          {withSubInfo && (
+            <ExpanderCell width={'3%'} expanded={expanded} onExpand={this.onExpand} />
           )}
+          {columns.map((column) => (
+            <GridCell
+              key={column.id}
+              data={data}
+              meta={meta}
+              actions={actions}
+              component={column.component}
+              width={column.width}
+            />
+          ))}
         </div>
-        {this.state.withAccordion && (
-          <div className={cx('grid-row')}>
-            <div className={cx('accordion-wrapper')}>
-              <div className={cx('accordion-block')}>
-                <div
-                  className={cx({ 'accordion-toggler': true, rotated: this.state.expanded })}
-                  onClick={this.toggleAccordion}
-                />
-              </div>
-            </div>
+        {selectable && <div className={cx('overflow-block')} />}
+        {expanded && (
+          <div className={cx('grid-row-additional')}>
+            <SubInfoComponent data={data} actions={actions} />
           </div>
         )}
       </div>
